@@ -1,54 +1,65 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Угадай мелодию</title>
-  <link href="css/main.min.css" rel="stylesheet">
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 cities: authorization</title>
+    <link rel="stylesheet" href="css/main.css">
+  </head>
 
-  <main class="app">
-    <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: -1200em;">
-      <filter id="blur">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="5"></feGaussianBlur>
-        <feOffset dx="0" dy="0"></feOffset>
-        <feMerge>
-          <feMergeNode></feMergeNode>
-          <feMergeNode in="SourceGraphic"></feMergeNode>
-        </feMerge>
-      </filter>
-    </svg>
-    <section class="main" id="root">
-      <section class="login">
-        <div class="login__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"></div>
-        <h2 class="login__title">Вы настоящий меломан!</h2>
-        <p class="login__text">Хотите узнать свой результат? Представтесь!</p>
-        <form class="login__form" action="">
-          <p class="login__field">
-            <label class="login__label" for="name">Логин</label>
-            <input class="login__input" type="text" name="name" id="name">
-          </p>
-          <p class="login__field">
-            <label class="login__label" for="password">Пароль</label>
-            <input class="login__input" type="text" name="password" id="password">
-            <span class="login__error">Неверный пароль</span>
-          </p>
-          <button class="login__button button" type="submit">Войти</button>
-        </form>
-        <button class="replay" type="button">Сыграть ещё раз</button>
-      </section>
-    </section>
-  </main>
+  <body class="page page--gray page--login">
+    <div style="display: none">
+      <svg xmlns="http://www.w3.org/2000/svg"><symbol id="icon-arrow-select" viewbox="0 0 7 4"><path fill-rule="evenodd" clip-rule="evenodd" d="M0 0l3.5 2.813L7 0v1.084L3.5 4 0 1.084V0z"></path></symbol><symbol id="icon-bookmark" viewbox="0 0 17 18"><path d="M3.993 2.185l.017-.092V2c0-.554.449-1 .99-1h10c.522 0 .957.41.997.923l-2.736 14.59-4.814-2.407-.39-.195-.408.153L1.31 16.44 3.993 2.185z"></path></symbol><symbol id="icon-star" viewbox="0 0 13 12"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 9.644L10.517 12 9.451 7.56 13 4.573l-4.674-.386L6.5 0 4.673 4.187 0 4.573 3.549 7.56 2.483 12 6.5 9.644z"></path></symbol></svg>
+    </div>
 
-  <footer class="footer">
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">
-      <img src="img/icon-cc.png" alt="Creative Commons License" width="88" height="31" style="border-width:0">
-    </a>
-    <section class="copyright">
-      <a class="copyright__logo" href="https://htmlacademy.ru"><img src="img/logo-htmla.svg" width="144" height="49" alt="HTML Academy"></a>
-      <p class="copyright__text">Сделано в <a class="copyright__link" href="https://htmlacademy.ru">HTML Academy</a></p>
-    </section>
-  </footer>
+    <header class="header">
+      <div class="container">
+        <div class="header__wrapper">
+          <div class="header__left">
+            <a class="header__logo-link" href="main.html">
+              <img class="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41">
+            </a>
+          </div>
+          <nav class="header__nav">
+            <ul class="header__nav-list">
+              <li class="header__nav-item user">
+                <a class="header__nav-link header__nav-link--profile" href="#">
+                  <div class="header__avatar-wrapper user__avatar-wrapper">
+                  </div>
+                  <span class="header__login">Sign in</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
 
-</body>
+    <main class="page__main page__main--login">
+      <div class="page__login-container container">
+        <section class="login">
+          <h1 class="login__title">Sign in</h1>
+          <form class="login__form form" action="#" method="post">
+            <div class="login__input-wrapper form__input-wrapper">
+              <label class="visually-hidden">E-mail</label>
+              <input class="login__input form__input" type="email" name="email" placeholder="Email" required="">
+            </div>
+            <div class="login__input-wrapper form__input-wrapper">
+              <label class="visually-hidden">Password</label>
+              <input class="login__input form__input" type="password" name="password" placeholder="Password" required="">
+            </div>
+            <button class="login__submit form__submit button" type="submit">Sign in</button>
+          </form>
+        </section>
+        <section class="locations locations--login locations--current">
+          <div class="locations__item">
+            <a class="locations__item-link" href="#">
+              <span>Amsterdam</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
 </html>
