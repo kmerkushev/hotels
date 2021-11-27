@@ -1,23 +1,24 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import proptypes from '../../proptypes.js';
+import propTypes from '../../proptypes.js';
 
-import PlacesCards from "../places-cards/places-cards";
+import PlaceCardList from "../place-card-list/place-card-list";
 
-const NearPlaces = ({offers}) => {
+const NearPlaces = ({ offers }) => {
 
   return (
     <React.Fragment>
       <section className="near-places places">
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
         <div className="near-places__list places__list">
-          <PlacesCards offers={offers} />
+          <PlaceCardList offers={offers} />
         </div>
       </section>
     </React.Fragment>
   );
 };
 
-NearPlaces.propTypes = proptypes.offers;
+NearPlaces.propTypes = {
+  offers: propTypes.offers,
+};
 
 export default NearPlaces;

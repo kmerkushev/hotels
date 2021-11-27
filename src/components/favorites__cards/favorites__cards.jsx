@@ -1,16 +1,11 @@
-import React, {useState} from "react";
-import PropTypes from 'prop-types';
-
-import FavoriteCard from '../favorites__card/favorites__card';
-
+import React from "react";
+import FavoritesCard from "../favorites__card/favorites__card";
 import propTypes from "../../proptypes";
 
-const FavoritesCards = (props) => {
-  const {offers} = props;
-
+const FavoritesCards = ({ offers }) => {
   return <React.Fragment>
     {offers.map((offer) => (
-      <FavoriteCard key={offer.id} offer={offer}/>))
+      <FavoritesCard key={offer.id} offer={offer}/>))
     }
   </React.Fragment>;
 };

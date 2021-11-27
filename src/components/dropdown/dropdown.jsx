@@ -1,9 +1,11 @@
 import React from "react";
 import propTypes from "../../proptypes";
-import {ActionCreator} from "../../action";
-import {connect} from 'react-redux';
+import { setCurrentFilterAction, sortOffersAction } from "../../redux/hotels/actions";
+import { useDispatch } from "react-redux";
+import { closeDropdown } from "../../utils/animate-dropdown";
 
-const Dropdown = ({currentFilter, dropdownOptions, sortOffers, closeDropdown, changeCurrentFilter}) => {
+const Dropdown = ({ currentFilter, dropdownOptions }) => {
+  const dispatch = useDispatch();
   return (
     <React.Fragment>
       <ul className="places__options places__options--custom">
@@ -11,9 +13,9 @@ const Dropdown = ({currentFilter, dropdownOptions, sortOffers, closeDropdown, ch
           <li className={`places__option ` + ((currentFilter === option) ? `places__option--active` : ``)} tabIndex="0" key={index}
             onClick={(evt) => {
               evt.preventDefault();
-              changeCurrentFilter(evt.target.textContent);
-              sortOffers();
+              dispatch(setCurrentFilterAction(evt.target.textContent));
               closeDropdown();
+              dispatch(sortOffersAction());
             }
             }>{option}</li>
         ))}
@@ -22,26 +24,9 @@ const Dropdown = ({currentFilter, dropdownOptions, sortOffers, closeDropdown, ch
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  changeCurrentFilter(filterName) {
-    dispatch(ActionCreator.changeCurrentFilter(filterName));
-  },
-  sortOffers(currentFilter) {
-    dispatch(ActionCreator.sortOffers(currentFilter));
-  },
-  closeDropdown() {
-    dispatch(ActionCreator.closeDropdown());
-  },
-});
-
 Dropdown.propTypes = {
   currentFilter: propTypes.currentFilter,
   dropdownOptions: propTypes.dropdownOptions,
-  sortOffers: propTypes.func,
-  closeDropdown: propTypes.func,
-  changeCurrentFilter: propTypes.func,
 };
 
-export {Dropdown};
-
-export default connect(null, mapDispatchToProps)(Dropdown);
+export default Dropdown;

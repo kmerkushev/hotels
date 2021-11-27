@@ -1,37 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createAPI } from "./api/api";
+import { Provider } from "react-redux";
+import { Router } from "react-router-dom";
+import { configureStore } from "@reduxjs/toolkit";
 import App from "./components/app/app";
-import {Provider} from "react-redux";
-import {composeWithDevTools} from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import {createStore, applyMiddleware} from "redux";
-
-import {reducer} from "./reducer";
-import {createAPI} from "./api";
-import {checkAuth, fetchOffersList} from "./api-actions";
-import {AuthorizationStatus} from "./const";
-import {ActionCreator} from "./action";
-import {redirect} from "./redirect";
+import rootReducer from "./redux/root-reducer";
+import { checkAuthAsync, requireAuthorizationAction } from "./redux/auth/actions";
+import { AuthorizationStatus } from "./const";
+import { redirect } from "./redirect";
+import browserHistory from "./browser-history";
 
 const api = createAPI(
-    () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
+    () => store.dispatch(requireAuthorizationAction(AuthorizationStatus.NO_AUTH)),
 );
 
 const rootElement = document.getElementById(`root`);
 
-const store = createStore(
-    reducer,
-    composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api)),
-        applyMiddleware(redirect),
-    )
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }).concat(redirect)
+});
 
-store.dispatch(checkAuth());
-store.dispatch(fetchOffersList());
+store.dispatch(checkAuthAsync());
+
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
-    </Provider>, rootElement
+      <Router history={browserHistory}>
+        <App />
+      </Router>
+    </Provider>,
+    rootElement
 );

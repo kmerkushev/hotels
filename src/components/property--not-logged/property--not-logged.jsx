@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from 'prop-types';
-
 import Header from "../header/header";
 import Map from "../map/map";
 import NearPlaces from "../near-places/near-places";
@@ -12,9 +10,7 @@ import PropertyPrice from "../property__price/property__price";
 import RatingBig from "../rating-big/rating-big";
 import Review from '../review/review';
 
-const PropertyNotLogged = (props) => {
-  const {offersCount} = props;
-
+const PropertyNotLogged = () => {
   return (
     <React.Fragment>
       <Header />

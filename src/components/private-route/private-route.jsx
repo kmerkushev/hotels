@@ -1,10 +1,21 @@
 import React from 'react';
-import {Route, Redirect} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import { Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { request, AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus, getIsAuthChecked } from "../../redux/auth/selectors";
 import propTypes from '../../proptypes';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-const PrivateRoute = ({render, path, exact, authorizationStatus}) => {
+const PrivateRoute = ({ path, exact, render }) => {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const isAuthChecked = useSelector(getIsAuthChecked);
+
+  if (!isAuthChecked) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <Route
       path={path}
@@ -12,26 +23,16 @@ const PrivateRoute = ({render, path, exact, authorizationStatus}) => {
       render={(routeProps) => (
         authorizationStatus === AuthorizationStatus.AUTH
           ? render(routeProps)
-          : <Redirect to={AppRoute.LOGIN} />
+          : <Redirect to={request.get.login()} />
       )}
     />
   );
-
 };
 
 PrivateRoute.propTypes = {
-  authorizationStatus: propTypes.authorizationStatus,
   exact: propTypes.bool.isRequired,
   path: propTypes.string.isRequired,
   render: propTypes.func.isRequired,
 };
 
-let mapStateToProps = (state) => {
-  return {
-    authorizationStatus: state.authorizationStatus,
-  };
-};
-
-export {PrivateRoute};
-
-export default connect(mapStateToProps, null)(PrivateRoute);
+export default PrivateRoute;

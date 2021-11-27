@@ -1,19 +1,18 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import propTypes from "../../proptypes";
 
-const PropertyFeatureBedrooms = (props) => {
-  const {offersCount} = props;
-
+const PropertyFeatureBedrooms = ({ bedrooms }) => {
   return (
     <React.Fragment>
       <li className="property__feature property__feature--bedrooms">
-        3 Bedrooms
+        {bedrooms} Bedrooms
       </li>
     </React.Fragment>
   );
 };
 
 PropertyFeatureBedrooms.propTypes = {
+  bedrooms: propTypes.bedrooms,
 };
 
 export default PropertyFeatureBedrooms;

@@ -1,14 +1,13 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import { Link, useHistory } from 'react-router-dom';
 
-const LogoMini = (props) => {
-  const {offersCount} = props;
-
+const LogoMini = () => {
+  const history = useHistory();
   return (
     <React.Fragment>
-      <a className="footer__logo-link" href="main.html">
-        <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-      </a>
+      <Link className="footer__logo-link" to="/" onClick={() => history.push(`/`)}>
+        <img className="footer__logo" src="/img/logo.svg" alt="6 cities logo" width="64" height="33" />
+      </Link>
     </React.Fragment>
   );
 };

@@ -1,12 +1,11 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import propTypes from "../../proptypes";
-import {connect} from 'react-redux';
-import getPointsFromOffers from "../../getPointsFromOffers";
+import getPointsFromOffers from "../../utils/get-points-from-offers";
 
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const Map = ({city, offers}) => {
+const Map = ({ city, offers }) => {
   const mapRef = useRef();
 
   let points = getPointsFromOffers(offers);
@@ -28,7 +27,7 @@ const Map = ({city, offers}) => {
 
     points.forEach((point) => {
       const customIcon = leaflet.icon({
-        iconUrl: `./img/pin.svg`,
+        iconUrl: `/img/pin.svg`,
         iconSize: [27, 39]
       });
 
@@ -42,6 +41,7 @@ const Map = ({city, offers}) => {
         .addTo(mapRef.current)
         .bindPopup(point.title);
     });
+
     return () => {
       mapRef.current.remove();
     };
@@ -49,16 +49,11 @@ const Map = ({city, offers}) => {
 
   return (
     <React.Fragment>
-      <div id="map" style={{height: `100%`}}></div>
+      <section className="cities__map map">
+        <div id="map" style={{ height: `100%` }}></div>
+      </section>
     </React.Fragment>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    city: state.city,
-    offers: state.offers,
-  };
 };
 
 Map.propTypes = {
@@ -66,6 +61,4 @@ Map.propTypes = {
   offers: propTypes.offers,
 };
 
-export {Map};
-
-export default connect(mapStateToProps, null)(Map);
+export default Map;

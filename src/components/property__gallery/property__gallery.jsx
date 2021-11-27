@@ -1,21 +1,16 @@
 import React from "react";
-import PropTypes from 'prop-types';
-
+import propTypes from "../../proptypes";
 import PropertyImage from '../property__image/property__image';
+import { nanoid } from "nanoid";
 
-const PropertyGallery = (props) => {
-  const {offersCount} = props;
-
+const PropertyGallery = ({ images }) => {
   return (
     <React.Fragment>
       <div className="property__gallery-container container">
         <div className="property__gallery">
-          <PropertyImage />
-          <PropertyImage />
-          <PropertyImage />
-          <PropertyImage />
-          <PropertyImage />
-          <PropertyImage />
+          {images.map((imageUrl) => (
+            <PropertyImage imageUrl={imageUrl} key={nanoid()}/>
+          ))}
         </div>
       </div>
     </React.Fragment>
@@ -23,6 +18,7 @@ const PropertyGallery = (props) => {
 };
 
 PropertyGallery.propTypes = {
+  images: propTypes.images,
 };
 
 export default PropertyGallery;

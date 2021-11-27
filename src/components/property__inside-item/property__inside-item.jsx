@@ -1,17 +1,18 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import propTypes from "../../proptypes";
 
-const PropertyInsideItem = (props) => {
+const PropertyInsideItem = ({ item }) => {
   return (
     <React.Fragment>
       <li className="property__inside-item">
-        Wi-Fi
+        {item}
       </li>
     </React.Fragment>
   );
 };
 
 PropertyInsideItem.propTypes = {
+  item: propTypes.string,
 };
 
 export default PropertyInsideItem;

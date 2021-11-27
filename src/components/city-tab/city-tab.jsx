@@ -1,22 +1,25 @@
 import React from "react";
-import {connect} from 'react-redux';
-import {ActionCreator} from "../../action";
+import { useSelector, useDispatch } from "react-redux";
+import { setCityAction, setOffersAction } from "../../redux/hotels/actions";
 import propTypes from "../../proptypes";
-import getCityByName from "../../getCityByName";
-import getOffersByCity from "../../getOffersByCity";
+import { getCityByName } from "../../utils/get-city-by-name";
+import { getOffersByCityName } from "../../utils/get-offers-by-city-name";
+import { closeDropdown } from "../../utils/animate-dropdown";
+import { getAllOffers } from "../../redux/hotels/selectors";
 
-const CityTab = ({cityName, allOffers, changeCity, changeOffers, closeDropdown, sortOffers}) => {
+const CityTab = ({ cityName }) => {
+  const allOffers = useSelector(getAllOffers);
+  const dispatch = useDispatch();
   return (
     <React.Fragment>
       <li className="locations__item">
-        <a className="locations__item-link tabs__item"
+        <a className="locations__item-link tabs__item" href=""
           onClick={(evt) => {
             evt.preventDefault();
-            changeCity(getCityByName(evt.target.textContent));
-            changeOffers(getOffersByCity(cityName, allOffers));
+            dispatch(setCityAction(getCityByName(evt.target.textContent)));
+            dispatch(setOffersAction(getOffersByCityName(cityName, allOffers)));
             closeDropdown();
-            sortOffers();
-          }} href="">
+          }}>
           <span>{cityName}</span>
         </a>
       </li>
@@ -24,37 +27,8 @@ const CityTab = ({cityName, allOffers, changeCity, changeOffers, closeDropdown, 
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cities: state.cities,
-    allOffers: state.allOffers,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
-  },
-  changeOffers() {
-    dispatch(ActionCreator.changeOffers());
-  },
-  closeDropdown() {
-    dispatch(ActionCreator.closeDropdown());
-  },
-  sortOffers() {
-    dispatch(ActionCreator.sortOffers());
-  },
-});
-
 CityTab.propTypes = {
   cityName: propTypes.string.isRequired,
-  allOffers: propTypes.offers,
-  changeCity: propTypes.func.isRequired,
-  changeOffers: propTypes.func.isRequired,
-  closeDropdown: propTypes.func.isRequired,
-  sortOffers: propTypes.func.isRequired,
 };
 
-export {CityTab};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CityTab);
+export default React.memo(CityTab);

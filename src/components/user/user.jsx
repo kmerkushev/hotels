@@ -1,22 +1,23 @@
 import React from "react";
-import {connect} from "react-redux";
-import propTypes from "../../proptypes";
-import {AuthorizationStatus} from "../../const";
-import {AppRoute} from "../../const";
-import {Link, useHistory} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { AuthorizationStatus } from "../../const";
+import { request } from "../../const";
+import { Link, useHistory } from "react-router-dom";
+import { getAuthorizationStatus } from "../../redux/auth/selectors";
 
-const User = ({authorizationStatus}) => {
+const User = () => {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
   const history = useHistory();
 
   if (authorizationStatus === AuthorizationStatus.AUTH) {
     return (
       <React.Fragment>
         <li className="header__nav-item user">
-          <a className="header__nav-link header__nav-link--profile" href="#">
+          <Link to={request.path.favorites()} className="header__nav-link header__nav-link--profile">
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-          </a>
+          </Link>
         </li>
       </React.Fragment>
     );
@@ -25,7 +26,7 @@ const User = ({authorizationStatus}) => {
   return (
     <React.Fragment>
       <li className="header__nav-item user">
-        <Link to={AppRoute.LOGIN} className="header__nav-link header__nav-link--profile" onClick={() => history.push(AppRoute.LOGIN)}>
+        <Link to={request.get.login()} className="header__nav-link header__nav-link--profile" onClick={() => history.push(request.get.login())}>
           <div className="header__avatar-wrapper user__avatar-wrapper">
           </div>
           <span className="header__login">Sign in</span>
@@ -35,16 +36,4 @@ const User = ({authorizationStatus}) => {
   );
 };
 
-User.propTypes = {
-  authorizationStatus: propTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => {
-  return {
-    authorizationStatus: state.authorizationStatus,
-  };
-};
-
-export {User};
-
-export default connect(mapStateToProps, null)(User);
+export default React.memo(User);

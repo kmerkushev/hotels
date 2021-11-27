@@ -3,12 +3,10 @@ import HeaderNav from "../header-nav/header-nav";
 import SvgIcons from "../svg-icons/svg-icons";
 import Logo from "../logo/logo";
 
-
 const Header = () => {
   return (
     <React.Fragment>
       <SvgIcons />
-
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -23,7 +21,4 @@ const Header = () => {
   );
 };
 
-Header.propTypes = {
-};
-
-export default Header;
+export default React.memo(Header);

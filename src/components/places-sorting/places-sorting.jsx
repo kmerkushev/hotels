@@ -1,11 +1,12 @@
 import React from "react";
-import propTypes from "../../proptypes";
 import Dropdown from '../dropdown/dropdown';
-import {toggleDropdown} from "../../animateDropdown";
-import {dropdownOptions} from "../../const";
-import {connect} from "react-redux";
+import { toggleDropdown } from "../../utils/animate-dropdown";
+import { dropdownOptions } from "../../const";
+import { useSelector } from "react-redux";
+import { getCurrentFilter } from "../../redux/hotels/selectors";
 
-const PlacesSorting = ({currentFilter}) => {
+const PlacesSorting = () => {
+  const currentFilter = useSelector(getCurrentFilter);
 
   return (
     <React.Fragment>
@@ -25,12 +26,4 @@ const PlacesSorting = ({currentFilter}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentFilter: state.currentFilter,
-});
-
-PlacesSorting.propTypes = propTypes.currentFilter;
-
-export {PlacesSorting};
-
-export default connect(mapStateToProps, null)(PlacesSorting);
+export default React.memo(PlacesSorting);

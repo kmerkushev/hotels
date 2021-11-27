@@ -1,16 +1,18 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import propTypes from "../../proptypes";
+import ratingToPercents from "../../utils/rating-to-percents";
 
-const RatingBig = (props) => {
+const RatingBig = ({ rating }) => {
   return <React.Fragment>
     <div className="property__stars rating__stars">
-      <span style={{width: `96%`}}></span>
+      <span style={{ width: `${ratingToPercents(rating)}%` }}></span>
       <span className="visually-hidden">Rating</span>
     </div>
   </React.Fragment>;
 };
 
 RatingBig.propTypes = {
+  rating: propTypes.rating,
 };
 
 export default RatingBig;

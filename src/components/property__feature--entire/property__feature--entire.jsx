@@ -1,19 +1,18 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import propTypes from "../../proptypes";
 
-const PropertyFeatureEntire = (props) => {
-  const {offersCount} = props;
-
+const PropertyFeatureEntire = ({ type }) => {
   return (
     <React.Fragment>
       <li className="property__feature property__feature--entire">
-        Entire place
+        {type}
       </li>
     </React.Fragment>
   );
 };
 
 PropertyFeatureEntire.propTypes = {
+  type: propTypes.type,
 };
 
 export default PropertyFeatureEntire;

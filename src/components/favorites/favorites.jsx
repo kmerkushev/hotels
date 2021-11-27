@@ -1,15 +1,17 @@
 import React from "react";
-import PropTypes from 'prop-types';
-
 import Header from '../header/header';
 import LocationsItem from '../locations__item/locations__item';
 import FavoritesCards from '../favorites__cards/favorites__cards';
 import Footer from '../footer/footer';
+import { useSelector } from "react-redux";
+import { getFavorites } from "../../redux/favorites/selectors";
+import { getCitiesFromOffers } from "../../utils/get-cities-from-offers";
+import { getOffersByCityName } from "../../utils/get-offers-by-city-name";
+import { nanoid } from "nanoid";
 
-import propTypes from "../../proptypes";
-
-const Favorites = (props) => {
-  const {offers} = props;
+const Favorites = () => {
+  const favoriteOffers = useSelector(getFavorites);
+  const cities = getCitiesFromOffers(favoriteOffers);
 
   return (
     <React.Fragment>
@@ -19,23 +21,16 @@ const Favorites = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <LocationsItem />
-                </div>
-                <div className="favorites__places">
-                  <FavoritesCards offers={offers}/>
-                </div>
-              </li>
-
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <LocationsItem />
-                </div>
-                <div className="favorites__places">
-                  <FavoritesCards offers={offers}/>
-                </div>
-              </li>
+              {cities.map((city) => (
+                <li className="favorites__locations-items" key={nanoid()}>
+                  <div className="favorites__locations locations locations--current">
+                    <LocationsItem cityName={city.name}/>
+                  </div>
+                  <div className="favorites__places">
+                    <FavoritesCards offers={getOffersByCityName(city.name, favoriteOffers)}/>
+                  </div>
+                </li>
+              ))}
             </ul>
           </section>
         </div>
@@ -44,7 +39,5 @@ const Favorites = (props) => {
     </React.Fragment>
   );
 };
-
-Favorites.propTypes = propTypes.offers;
 
 export default Favorites;

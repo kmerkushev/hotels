@@ -1,10 +1,12 @@
 import React from "react";
-import propTypes from "../../proptypes";
 import CityTab from '../city-tab/city-tab';
 import CityTabActive from '../city-tab--active/city-tab--active';
-import {connect} from "react-redux";
+import { useSelector } from "react-redux";
+import { getCities, getCity } from "../../redux/hotels/selectors";
 
-const CitiesTabs = ({cities, currentCity}) => {
+const CitiesTabs = () => {
+  const cities = useSelector(getCities);
+  const currentCity = useSelector(getCity);
   return (
     <React.Fragment>
       <div className="cities tabs">
@@ -20,16 +22,4 @@ const CitiesTabs = ({cities, currentCity}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  cities: state.cities,
-  currentCity: state.city,
-});
-
-CitiesTabs.propTypes = {
-  cities: propTypes.cities,
-  currentCity: propTypes.city,
-};
-
-export {CitiesTabs};
-
-export default connect(mapStateToProps, null)(CitiesTabs);
+export default React.memo(CitiesTabs);

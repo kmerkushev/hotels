@@ -1,11 +1,7 @@
 import React from "react";
-import PropTypes from 'prop-types';
-
 import LogoMini from '../logo--mini/logo--mini';
 
-const Footer = (props) => {
-  const {offersCount} = props;
-
+const Footer = () => {
   return (
     <React.Fragment>
       <footer className="footer container">
@@ -15,7 +11,4 @@ const Footer = (props) => {
   );
 };
 
-Footer.propTypes = {
-};
-
-export default Footer;
+export default React.memo(Footer);

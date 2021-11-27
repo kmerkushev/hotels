@@ -1,12 +1,12 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import propTypes from "../../proptypes";
 
-const LocationsItem = (props) => {
+const LocationsItem = ({ cityName }) => {
   return (
     <React.Fragment>
       <div className="locations__item">
         <a className="locations__item-link" href="#">
-          <span>Amsterdam</span>
+          <span>{cityName}</span>
         </a>
       </div>
     </React.Fragment>
@@ -14,6 +14,7 @@ const LocationsItem = (props) => {
 };
 
 LocationsItem.propTypes = {
+  cityName: propTypes.string.isRequired,
 };
 
 export default LocationsItem;
