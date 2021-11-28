@@ -70,7 +70,7 @@ const Offer = () => {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={city} offers={hotelsNearby}/>
+            <Map city={city} offers={[offer]}/>
           </section>
         </section>
 

@@ -49,7 +49,7 @@ const Map = ({ city, offers }) => {
 
   return (
     <React.Fragment>
-      <section className="cities__map map">
+      <section className="cities__map map" style={{ height: `100%` }}>
         <div id="map" style={{ height: `100%` }}></div>
       </section>
     </React.Fragment>
