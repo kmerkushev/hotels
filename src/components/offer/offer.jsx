@@ -24,7 +24,6 @@ const Offer = () => {
   const hotelsNearby = useSelector(getHotelsNearby);
   const {
     bedrooms,
-    city,
     description,
     goods,
     host,
@@ -70,7 +69,7 @@ const Offer = () => {
             </div>
           </div>
           <section className="property__map map">
-            <Map city={city} offers={[offer]}/>
+            <Map city={{ location: offer.location }} offers={[offer]}/>
           </section>
         </section>
 
