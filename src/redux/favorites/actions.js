@@ -2,6 +2,7 @@ import * as types from "./actionTypes";
 import { request } from "../../const";
 import { parseOffers } from "../../utils/parse-offers";
 import camelizeObject from "../../utils/camelize-object";
+import { removeFromFavorites } from "../../utils/remove-from-favorites";
 import { createAction } from '@reduxjs/toolkit';
 import { updateOffersAction } from "../hotels/actions";
 import { updateCurrentOfferAction } from "../offer/actions";
@@ -11,6 +12,10 @@ export const setFavoritesAction = createAction(types.SET_FAVORITES, (favoriteOff
 }));
 
 export const resetFavoritesAction = createAction(types.RESET_FAVORITES);
+
+export const removeFromFavoritesAction = createAction(types.REMOVE_FROM_FAVORITES, (favorites, offer) => ({
+  payload: removeFromFavorites(favorites, offer)
+}));
 
 export const loadFavoritesAsync = () => (dispatch, _getState, api) => (
   api.get(request.get.favorites())

@@ -1,4 +1,4 @@
-import { resetFavoritesAction, setFavoritesAction } from "./actions";
+import { resetFavoritesAction, setFavoritesAction, removeFromFavoritesAction } from "./actions";
 import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -14,6 +14,9 @@ const favoritesReducer = createReducer(initialState, (builder) => {
   builder.addCase(resetFavoritesAction, (state) => {
     state.favorites = [];
     state.isFavoritesLoaded = false;
+  });
+  builder.addCase(removeFromFavoritesAction, (state, action) => {
+    state.favorites = action.payload;
   });
 });
 

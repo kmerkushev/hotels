@@ -1,11 +1,20 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import propTypes from "../../proptypes";
 import { request } from "../../const";
 import BookmarkButtonActive from "../bookmark-button--active/bookmark-button--active";
+import { removeFromFavoritesAction } from "../../redux/favorites/actions";
+import { getFavorites } from "../../redux/favorites/selectors";
 
 const FavoritesCard = ({ offer }) => {
   const { price, title, type, id } = offer;
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    console.log(`ok`);
+    const favorites = useSelector(getFavorites);
+    dispatch(removeFromFavoritesAction(favorites, offer));
+  };
 
   return (
     <React.Fragment>
@@ -21,7 +30,7 @@ const FavoritesCard = ({ offer }) => {
               <b className="place-card__price-value">&euro;{price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <BookmarkButtonActive id={id} />
+            <BookmarkButtonActive id={id} onClick={handleClick}/>
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">

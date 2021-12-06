@@ -5,9 +5,9 @@ const LocationsItem = ({ cityName }) => {
   return (
     <React.Fragment>
       <div className="locations__item">
-        <a className="locations__item-link" href="#">
+        <span className="locations__item-link" href="#">
           <span>{cityName}</span>
-        </a>
+        </span>
       </div>
     </React.Fragment>
   );
