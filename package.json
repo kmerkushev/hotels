@@ -1,5 +1,5 @@
 {
-    "homepage": "http://kmerkushev.github.io/hotels",
+    "homepage": "https://kmerkushev.github.io/hotels/",
     "name": "six-cities-hotel-rental-service",
     "version": "0.9.5",
     "private": true,
@@ -10,7 +10,7 @@
         "test.jest": "jest",
         "build": "webpack --mode production",
         "start": "webpack-dev-server",
-        "deploy": "gh-pages -d build"
+        "deploy": "gh-pages -d public"
     },
     "devDependencies": {
         "@babel/core": "^7.12.17",
