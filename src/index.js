@@ -10,7 +10,6 @@ import { checkAuthAsync, requireAuthorizationAction } from "./redux/auth/actions
 import { AuthorizationStatus } from "./const";
 import { redirect } from "./redirect";
 import browserHistory from "./browser-history";
-import ansiHTML from "ansi-html-community";
 
 const api = createAPI(
     () => store.dispatch(requireAuthorizationAction(AuthorizationStatus.NO_AUTH)),
