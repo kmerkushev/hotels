@@ -2,7 +2,7 @@
     "homepage": "https://kmerkushev.github.io/hotels/",
     "name": "six-cities-hotel-rental-service",
     "version": "0.9.5",
-    "private": true,
+    "private": false,
     "description": "Hotel rental service in 6 European cities / Сервис аренды отелей в шести европейских городах.»",
     "scripts": {
         "eslint": "eslint --ext .jsx --ext .js src/",
@@ -10,7 +10,8 @@
         "test.jest": "jest",
         "build": "webpack --mode production",
         "start": "webpack-dev-server",
-        "deploy": "gh-pages -d public"
+        "deploy": "gh-pages -d public",
+        "predeploy": "npm run build"
     },
     "devDependencies": {
         "@babel/core": "^7.12.17",
